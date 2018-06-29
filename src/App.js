@@ -1,21 +1,34 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import { Button } from "reactstrap";
-import { Alert } from "reactstrap";
+import Bottom from "./Bottom";
+import Top from "./Top";
+import Input from './Input'
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      data: "Initial text"
+    }
+    this.handleFormChange = this.handleFormChange.bind(this)
+  }
+
+  handleFormChange(event){
+    this.setState({data:event.target.value})
+  }
+
   render() {
+    const data = this.state.data
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to our awesome project!</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Alert color="primary">The application has boostrap installed.. Woola!! </Alert>
+        <h1>{data} from the App.js</h1>
+        <h2>and it's being called from the 'App' component's state too</h2>
+        <hr />
+        <Top data={data} />
+        <hr />
+        <Bottom data={data} />
+        <hr/>
+        <Input data={data} changeHandler = {this.handleFormChange} />
       </div>
     );
   }
